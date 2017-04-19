@@ -39,13 +39,13 @@ def orderdXOver(a,b):
 		k = k +1
 
 	#Move Blanks to front
-	k = 7
-	while k >= 0:
+	k = 0
+	while k <= len(a)-1:
 		if a[k] == -1:
 			moveToFront(a,k)
 		if b[k] == -1:
 			moveToFront(b,k)
-		k= k - 1
+		k= k + 1
 
 	#Sub In
 	k = 0
@@ -70,10 +70,7 @@ def orderdXOver(a,b):
 			l = l+1
 	
 
-	print a
-	print b
-	print p1
-	print p2
+	return (a,b)
 	
 
 def moveToFront(x, k):
@@ -85,5 +82,14 @@ def moveToFront(x, k):
 
 
 x = [0,1,2,3,4,5,6,7]
-y = [6,7,2,0,5,3,1,4]
-orderdXOver(x,y)
+y = [7,6,5,4,3,2,1,0]
+i = 0
+print x
+print y
+while i<10:
+	child = orderdXOver(x,y)
+	x = child[0]
+	y = child[1]
+	print x 
+	print y
+	i +=1
