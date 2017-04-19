@@ -30,6 +30,12 @@ class Populate(object):
 		for perm in self.population:
 			cost.append(self.getCost(perm))
 		self.population = self.msort(cost,self.population)
+		cost = []
+		for perm in self.population:
+			cost.append(self.getCost(perm))
+		print cost
+		print len(cost)
+		print '\n'
 	def msort(self,cost,pop):
 		size = len(cost)
 		if size < 2:
