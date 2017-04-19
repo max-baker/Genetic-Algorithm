@@ -17,7 +17,7 @@ def main():
 	while iters < maxIters:
 		pairs = ga.topDown(int(params[1]/2)) #topDown or tournamentPairs
 		for n in pairs:
-			ga.cycleXOver(n[0], n[1]) #orderedXOver or cycleXOver
+			ga.orderedXOver(n[0], n[1]) #orderedXOver or cycleXOver
 		ga.sortPop()
 		ga.killBottom()
 		iters += 1

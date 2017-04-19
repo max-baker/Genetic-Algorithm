@@ -116,9 +116,9 @@ class Populate(object):
 			pairs.append((parent1,parent2))
 			n += 1
 		return pairs
-	def orderedXOver(self,a,b):
-		p1 = list(a)
-		p2 = list(b)
+	def orderedXOver(self,p1,p2):
+		a= list(p1)
+		b= list(p2)
 		i = randint(0,4)
 		j = i + randint(0,3)
 		p = []
@@ -184,9 +184,9 @@ class Populate(object):
 			x[k] = x[k-1]
 			k = k-1
 		x[0] = temp
-	def cycleXOver(self,a,b):
-		p1 = list(a)
-		p2 = list(b)
+	def cycleXOver(self,p1,p2):
+		a= list(p1)
+		b= list(p2)
 
 		#swap first
 		i = 0 
