@@ -2,10 +2,11 @@ import sys
 from random import randint
 
 class Populate(object):
-	def __init__(self, matrix, chromosomes):
+	def __init__(self, matrix, chromosomes, mutation):
 		self.matrix = matrix
 		self.genPop(chromosomes)
 		self.sortPop()
+		self.mutationOdds = mutation
 	def genPop(self, numChromes):
 		iteration = 0
 		self.population = []
@@ -85,7 +86,7 @@ class Populate(object):
 		return pairs
 	def tournamentPairs(self, numPairs):
 		pairs = []
-		tSize = 4
+		tSize = 8
 		n = 0
 		popSize = len(self.population)
 		while n < numPairs:
@@ -118,8 +119,6 @@ class Populate(object):
 	def orderedXOver(self,a,b):
 		p1 = list(a)
 		p2 = list(b)
-		print p2
-		print p1
 		i = randint(0,4)
 		j = i + randint(0,3)
 		p = []
@@ -149,13 +148,13 @@ class Populate(object):
 				b[k] = -1
 			k = k +1
 		#Move Blanks to front
-		k = 7
-		while k >= 0:
+		k = 0
+		while k <= len(a)-1:
 			if a[k] == -1:
 				self.moveToFront(a,k)
 			if b[k] == -1:
 				self.moveToFront(b,k)
-			k= k - 1
+			k= k + 1
 		#Sub In
 		k = 0
 		l = 0 
@@ -175,6 +174,8 @@ class Populate(object):
 				l=l+1
 			else: 
 				l = l+1
+		self.mutate(a)
+		self.mutate(b)
 		self.population.append(a)
 		self.population.append(b)
 	def moveToFront(self,x, k):
@@ -200,6 +201,8 @@ class Populate(object):
 			a[i] = b[i]
 			b[i] = temp
 		
+		self.mutate(a)
+		self.mutate(b)
 		self.population.append(a)
 		self.population.append(b)
 
@@ -220,3 +223,18 @@ class Populate(object):
 					return k
 			k = k+1
 		return -1
+
+	def mutate(self,xs):
+		mutationFactor = self.mutationOdds *100
+		dieRoll = randint(1,100)
+		if mutationFactor >= dieRoll: #Mutate (switch two random elements)
+			i = randint(0,len(xs)-1)
+			j = randint(0,len(xs)-1)
+			while i == j:
+				j = randint(0,len(xs)-1) #Re-Roll if equal
+			temp = xs[i]
+			xs[i] = xs[j]
+			xs[j] = temp
+
+
+		return

@@ -10,18 +10,18 @@ def main():
 	matrix = getm.matrix()
 	getp = GetParams.Parameters("params.txt")
 	params = getp.params()
-	ga = GA.Populate(matrix, int(params[1]))
+	ga = GA.Populate(matrix, int(params[1]), float(params[3]))
 	
 	maxIters = int(params[4])
 	iters = 0
 	while iters < maxIters:
-		pairs = ga.topDown(int(params[1]/2))
+		pairs = ga.topDown(int(params[1]/2)) #topDown or tournamentPairs
 		for n in pairs:
-			ga.cycleXOver(n[0], n[1])
+			ga.cycleXOver(n[0], n[1]) #orderedXOver or cycleXOver
 		ga.sortPop()
 		ga.killBottom()
 		iters += 1
-	print ga.getCost(ga.population[0])
+		print ga.getCost(ga.population[0])
 	
 if __name__ == '__main__':
 	if len(sys.argv) != 1:
