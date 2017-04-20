@@ -6,6 +6,10 @@ import GA
 def main():
 	#lower bound is 4135
 	#upper bound is 16417
+	#best cycle top 			6400
+	#best ordered top			6400
+	#best cycle tournament		6400
+	#best ordered tournament	6302
 	getm = GetMatrix.Connections("connections.txt")
 	matrix = getm.matrix()
 	getp = GetParams.Parameters("params.txt")
@@ -15,13 +19,14 @@ def main():
 	maxIters = int(params[2])
 	iters = 0
 	while iters < maxIters:
-		pairs = ga.topDown(int(params[0]/2))
+		pairs = ga.topDown(int(params[0]/2)) #topDown or tournamentPairs
 		for n in pairs:
-			ga.orderedXOver(n[0], n[1]) #orderedXOver or cycleXOver
+			ga.cycleXOver(n[0], n[1]) #orderedXOver or cycleXOver
 		ga.sortPop()
 		ga.killBottom()
 		iters += 1
 		print ga.getCost(ga.population[0])
+		print ga.population[0]
 	
 if __name__ == '__main__':
 	if len(sys.argv) != 1:

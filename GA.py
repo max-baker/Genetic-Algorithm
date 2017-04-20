@@ -31,12 +31,6 @@ class Populate(object):
 		for perm in self.population:
 			cost.append(self.getCost(perm))
 		self.population = self.msort(cost,self.population)
-		cost = []
-		for perm in self.population:
-			cost.append(self.getCost(perm))
-		print cost
-		print len(cost)
-		print '\n'
 	def msort(self,cost,pop):
 		size = len(cost)
 		if size < 2:
@@ -211,7 +205,6 @@ class Populate(object):
 		self.mutate(b)
 		self.population.append(a)
 		self.population.append(b)
-
 	def checkDuplicates (self,i, p):
 		k = 0
 		while k < len(p):
@@ -220,7 +213,6 @@ class Populate(object):
 					return True
 			k = k+1
 		return False
-
 	def duplicateIndex (self,i, p):
 		k = 0
 		while k < len(p):
@@ -229,7 +221,6 @@ class Populate(object):
 					return k
 			k = k+1
 		return -1
-
 	def mutate(self,xs):
 		mutationFactor = self.mutationOdds *100
 		dieRoll = randint(1,100)
@@ -241,6 +232,4 @@ class Populate(object):
 			temp = xs[i]
 			xs[i] = xs[j]
 			xs[j] = temp
-
-
 		return
